@@ -1,3 +1,4 @@
+import 'package:calculator/main.dart';
 import 'package:flutter/material.dart';
 
 class Button {
@@ -42,7 +43,7 @@ class Button {
         );
     }
 
-    Widget createIconBtn(Function f) {
+    Widget createIconBtn(BuildContext context) {
         return Container(
             width: Button.width,
             height: Button.height,
@@ -55,7 +56,32 @@ class Button {
                         ),                                                                                            
                 ),
                 child: IconButton(                                    
-                    onPressed: () => f, 
+                    onPressed: () {
+                        bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
+                        print("isPortrait = $isPortrait");
+                        print("isSetPortrait = $isSetPortrait");
+                        print("isSetLandscape = $isSetLandscape");
+
+                        if (isPortrait && !isSetPortrait && !isSetLandscape) {
+                            setLandscape();
+                        } else
+                        if (!isPortrait && isSetLandscape) {
+                            setRotate();
+                        } else 
+                        if (isPortrait && isSetLandscape) {
+                            setRotate();
+                        } else 
+                        if (!isPortrait && !isSetPortrait && !isSetLandscape) {
+                            setPortrait();
+                        } else
+                        if (isPortrait && isSetPortrait) {
+                            setRotate();
+                        } else
+                        if (!isPortrait && isSetPortrait) {
+                            setRotate();
+                        }                      
+                    },                     
                     icon: Icon(this.value),                                 
                     color: Colors.white,     
                     iconSize: size * width,                                

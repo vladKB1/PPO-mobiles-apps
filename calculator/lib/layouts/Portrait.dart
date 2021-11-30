@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../buttons/Button.dart';
 import '../buttons/Colors.dart';
+import '../main.dart';
 
 class Portrait extends StatefulWidget {
     const Portrait({ Key? key }) : super(key: key);
@@ -10,7 +11,6 @@ class Portrait extends StatefulWidget {
 }
 
 class _PortraitState extends State<Portrait> {
-    
     @override
     Widget build(BuildContext context) {
         Button.width = MediaQuery.of(context).size.width * 0.20;
@@ -63,7 +63,8 @@ class _PortraitState extends State<Portrait> {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,                     
                         children: <Widget>[  
-                            Button(Icons.screen_rotation_outlined, digits, Colors.white, size).createIconBtn(() => {}),
+                            Button(Icons.screen_rotation_outlined, digits, Colors.white, size).
+                            createIconBtn(context),
                             Button('0', digits, Colors.white, size).createBtn(),                            
                             Button(',', digits, Colors.white, size).createBtn(),                            
                             Button('=', stdOperation2, Colors.white, size).createBtn(),                                                        

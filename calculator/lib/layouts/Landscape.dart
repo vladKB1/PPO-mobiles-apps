@@ -93,7 +93,8 @@ class _LandscapeState extends State<Landscape> {
                             Button('tanh', scienceOperation, Colors.white, size / 1.72).createBtn(),
                             Button('π', scienceOperation, Colors.white, size / 1.72).createBtn(), 
                             Button('Rand', scienceOperation, Colors.white , size / 1.72).createBtn(), 
-                            Button(Icons.screen_rotation_outlined, digits, Colors.white, size).createIconBtn(() => {}),
+                            Button(Icons.screen_rotation_outlined, digits, Colors.white, size).
+                            createIconBtn(context),
                             Button('0', digits, Colors.white, size).createBtn(),                            
                             Button(',', digits, Colors.white, size).createBtn(),                            
                             Button('=', stdOperation2, Colors.white, size).createBtn(),                                                        
