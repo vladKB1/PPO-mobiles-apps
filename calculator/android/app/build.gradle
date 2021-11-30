@@ -25,6 +25,34 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+    // def getVersionCode = { ->
+    //     try {
+    //         def code = new ByteArrayOutputStream()
+    //         exec {
+    //             commandLine 'git', 'tag', '--list'
+    //             standardOutput = code
+    //         }
+    //         return code.toString().split("\n").size()
+    //     }
+    //     catch (ignored) {
+    //         return -1;
+    //     }
+    // }
+
+    // def getVersionName = { ->
+    //     try {
+    //         def stdout = new ByteArrayOutputStream()
+    //         exec {
+    //             commandLine 'git', 'describe', '--tags', '--dirty'
+    //             standardOutput = stdout
+    //         }
+    //         return stdout.toString().trim().replaceAll('v|-\\w+$', '').replace('-', '.')
+    //     }
+    //     catch (ignored) {
+    //         return null;
+    //     }
+    // }
+
 android {
     compileSdkVersion 30
 
