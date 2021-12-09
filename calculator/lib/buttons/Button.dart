@@ -1,4 +1,3 @@
-import 'package:calculator/main.dart';
 import 'package:flutter/material.dart';
 
 class Button {
@@ -28,11 +27,11 @@ class Button {
               color: this.colorVal,
             ),
           ),
-          style: ButtonStyle(            
+          style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                 borderRadius:
-                    BorderRadius.circular(Button.isPortrait ? 100 : 50.0),                
+                    BorderRadius.circular(Button.isPortrait ? 100 : 50.0),
               ),
             ),
             backgroundColor: MaterialStateProperty.all(this.colorBtn),

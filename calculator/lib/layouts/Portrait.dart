@@ -178,8 +178,6 @@ class _PortraitState extends State<Portrait> {
     double ans = exp.evaluate(EvaluationType.REAL, cm);
     expression = ans.toString();
 
-    if (checkLength(width)) {}
-
     if (expression.endsWith('.0'))
       expression = expression.substring(0, expression.length - 2);
 
