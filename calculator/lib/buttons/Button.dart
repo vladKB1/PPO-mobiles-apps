@@ -16,15 +16,13 @@ class Button {
     Button(this.value, this.colorBtn, this.colorVal, this.size);
 
 
-    Widget createBtn() {            
+    Widget createBtn(Function f) {  
         return Container(
             width: Button.width,
             height: Button.height,
             margin: Button.margin,           
             child: ElevatedButton(
-                onPressed: () => {
-
-                },
+                onPressed: () => f(this.value, width),
                 child: Text('${this.value}',
                     style: TextStyle(
                         fontSize: size * width,
@@ -40,53 +38,6 @@ class Button {
                     backgroundColor: MaterialStateProperty.all(this.colorBtn),                   
                 ),
             )
-        );
-    }
-
-    Widget createIconBtn(BuildContext context) {
-        return Container(
-            width: Button.width,
-            height: Button.height,
-            margin: Button.margin,  
-            child: Ink(
-                decoration: ShapeDecoration(
-                    color: Colors.grey[850],
-                    shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(Button.isPortrait ? 100 : 50.0),                            
-                        ),                                                                                            
-                ),
-                child: IconButton(                                    
-                    onPressed: () {
-                        bool isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
-
-                        print("isPortrait = $isPortrait");
-                        print("isSetPortrait = $isSetPortrait");
-                        print("isSetLandscape = $isSetLandscape");
-
-                        if (isPortrait && !isSetPortrait && !isSetLandscape) {
-                            setLandscape();
-                        } else
-                        if (!isPortrait && isSetLandscape) {
-                            setRotate();
-                        } else 
-                        if (isPortrait && isSetLandscape) {
-                            setRotate();
-                        } else 
-                        if (!isPortrait && !isSetPortrait && !isSetLandscape) {
-                            setPortrait();
-                        } else
-                        if (isPortrait && isSetPortrait) {
-                            setRotate();
-                        } else
-                        if (!isPortrait && isSetPortrait) {
-                            setRotate();
-                        }                      
-                    },                     
-                    icon: Icon(this.value),                                 
-                    color: Colors.white,     
-                    iconSize: size * width,                                
-                ),
-            ),
         );
     }
 }
