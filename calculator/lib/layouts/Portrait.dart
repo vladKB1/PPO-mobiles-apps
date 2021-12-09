@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -27,8 +28,17 @@ Map<String, String> oper = {
   ',': '.',
   '+': '+',
 };
+double portraitLength = 0;
 
 class _PortraitState extends State<Portrait> {
+  bool checkLength(double width) {
+    if ((expression.length + 1) * (width / 2) > portraitLength) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   void calculation(String text, double width) {
     if (expression == 'ОШИБКА') {
       expression = '0';
@@ -65,6 +75,8 @@ class _PortraitState extends State<Portrait> {
         isEvaluate = false;
       }
     } else if (text == '.') {
+      if (checkLength(width)) return;
+
       if (!isDot) {
         isDot = true;
         isEmpty = false;
@@ -81,14 +93,17 @@ class _PortraitState extends State<Portrait> {
     } else {
       if (isEmpty && text == '0') return;
 
+      if (checkLength(width)) return;
+
       if (isEvaluate) {
         isEmpty = true;
         isEvaluate = false;
+        isDot = false;
       }
 
       if (isEmpty) {
         expression = '';
-        isEmpty = false;
+        if (text != '0') isEmpty = false;
       }
       setState(() => expression += text);
     }
@@ -113,6 +128,8 @@ class _PortraitState extends State<Portrait> {
         setState(() => clr = 'AC');
       }
     }
+
+    if (checkLength(width)) return;
   }
 
   void clear(String text, double width) {
@@ -158,8 +175,16 @@ class _PortraitState extends State<Portrait> {
       return;
     }
 
-    setState(
-        () => expression = exp.evaluate(EvaluationType.REAL, cm).toString());
+    double ans = exp.evaluate(EvaluationType.REAL, cm);
+    expression = ans.toString();
+
+    if (checkLength(width)) {}
+
+    if (expression.endsWith('.0'))
+      expression = expression.substring(0, expression.length - 2);
+
+    setState(() => expression);
+
     history = '';
     isEvaluate = true;
     isDot = expression.contains('.');
@@ -167,6 +192,8 @@ class _PortraitState extends State<Portrait> {
 
   @override
   Widget build(BuildContext context) {
+    portraitLength = MediaQuery.of(context).size.width;
+
     var sz = min(MediaQuery.of(context).size.width * 0.20,
         MediaQuery.of(context).size.height * 0.13);
     Button.width = sz;
@@ -188,7 +215,7 @@ class _PortraitState extends State<Portrait> {
             child: Text(
               expression,
               style: TextStyle(
-                fontSize: sz,
+                fontSize: sz * 0.75,
                 color: Colors.white,
               ),
             ),
