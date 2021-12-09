@@ -2,42 +2,41 @@ import 'package:calculator/main.dart';
 import 'package:flutter/material.dart';
 
 class Button {
-    dynamic value = '';
-    Color? colorBtn;
-    Color? colorVal;
-    double size = 0;
+  dynamic value = '';
+  Color? colorBtn;
+  Color? colorVal;
+  double size = 0;
 
-    static double width = 0;
-    static double height = 0; 
-    static EdgeInsets margin = EdgeInsets.all(0);
-    static bool isPortrait = true;
-    
+  static double width = 0;
+  static double height = 0;
+  static EdgeInsets margin = EdgeInsets.all(0);
+  static bool isPortrait = true;
 
-    Button(this.value, this.colorBtn, this.colorVal, this.size);
+  Button(this.value, this.colorBtn, this.colorVal, this.size);
 
-
-    Widget createBtn(Function f) {  
-        return Container(
-            width: Button.width,
-            height: Button.height,
-            margin: Button.margin,           
-            child: ElevatedButton(
-                onPressed: () => f(this.value, width),
-                child: Text('${this.value}',
-                    style: TextStyle(
-                        fontSize: size * width,
-                        color: this.colorVal,                        
-                    ),
-                ),
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(Button.isPortrait ? 100 : 50.0),                            
-                        ),
-                    ),
-                    backgroundColor: MaterialStateProperty.all(this.colorBtn),                   
-                ),
-            )
-        );
-    }
+  Widget createBtn(Function f) {
+    return Container(
+        width: Button.width,
+        height: Button.height,
+        margin: Button.margin,
+        child: ElevatedButton(
+          onPressed: () => f(this.value, width),
+          child: Text(
+            '${this.value}',
+            style: TextStyle(
+              fontSize: size * width,
+              color: this.colorVal,
+            ),
+          ),
+          style: ButtonStyle(            
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius:
+                    BorderRadius.circular(Button.isPortrait ? 100 : 50.0),                
+              ),
+            ),
+            backgroundColor: MaterialStateProperty.all(this.colorBtn),
+          ),
+        ));
+  }
 }
