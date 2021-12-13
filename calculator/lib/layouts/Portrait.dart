@@ -1,10 +1,8 @@
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import '../buttons/Button.dart';
 import '../buttons/Colors.dart';
-import '../main.dart';
 import 'package:math_expressions/math_expressions.dart';
 
 class Portrait extends StatefulWidget {
@@ -117,6 +115,10 @@ class _PortraitState extends State<Portrait> {
     if (expression == 'ОШИБКА') {
       setState(() => expression = '0');
       return;
+    }
+
+    if (expression.endsWith('.')) {
+      isDot = false;
     }
 
     if (!isEmpty) {

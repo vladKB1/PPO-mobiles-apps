@@ -118,6 +118,10 @@ class _LandscapeState extends State<Landscape> {
       return;
     }
 
+    if (expression.endsWith('.')) {
+      isDot = false;
+    }
+
     if (!isEmpty) {
       setState(
           () => expression = expression.substring(0, expression.length - 1));
@@ -148,6 +152,8 @@ class _LandscapeState extends State<Landscape> {
       });
     }
   }
+
+  void extendedCalc(String text, double width) {}
 
   void evaluate(String text, double width) {
     if (expression == 'ОШИБКА') {
@@ -205,7 +211,7 @@ class _LandscapeState extends State<Landscape> {
   Widget build(BuildContext context) {
     portraitLength = MediaQuery.of(context).size.width;
 
-    var sz = min(MediaQuery.of(context).size.width * 0.08,
+    var sz = min(MediaQuery.of(context).size.width * 0.1,
         MediaQuery.of(context).size.height * 0.13);
     Button.width = sz;
     Button.height = sz;
@@ -221,7 +227,7 @@ class _LandscapeState extends State<Landscape> {
         children: [
           Container(
             alignment: Alignment.centerRight,
-            margin: EdgeInsets.fromLTRB(0, 0, expMargin, expMargin / 2),
+            margin: EdgeInsets.fromLTRB(0, 0, expMargin * 2, expMargin / 2),
             child: Text(
               expression,
               style: TextStyle(
@@ -233,18 +239,14 @@ class _LandscapeState extends State<Landscape> {
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Button('(', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button(')', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('mc', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('m+', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('m-', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('mr', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
+                Button('x²', scienceOperation, Colors.white, size / 1.72)
+                    .createBtn(extendedCalc),
+                Button('x³', scienceOperation, Colors.white, size / 1.72)
+                    .createBtn(extendedCalc),
+                Button('xʸ', scienceOperation, Colors.white, size / 1.72)
+                    .createBtn(extendedCalc),
+                Button('eˣ', scienceOperation, Colors.white, size / 1.72)
+                    .createBtn(extendedCalc),
                 Button(clr, stdOperation1, Colors.black, size / 1.55)
                     .createBtn(clear),
                 Button('+/-', stdOperation1, Colors.black, size / 1.5)
@@ -257,18 +259,14 @@ class _LandscapeState extends State<Landscape> {
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Button('2ⁿᵈ', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('x²', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('x³', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('xʸ', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('eˣ', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
                 Button('10ˣ', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
+                    .createBtn(extendedCalc),
+                Button('¹⁄ₓ', scienceOperation, Colors.white, size / 1.72)
+                    .createBtn(extendedCalc),
+                Button('x!', scienceOperation, Colors.white, size / 1.72)
+                    .createBtn(extendedCalc),
+                Button('e', scienceOperation, Colors.white, size / 1.72)
+                    .createBtn(extendedCalc),
                 Button('7', digits, Colors.white, size).createBtn(calculation),
                 Button('8', digits, Colors.white, size).createBtn(calculation),
                 Button('9', digits, Colors.white, size).createBtn(calculation),
@@ -278,18 +276,14 @@ class _LandscapeState extends State<Landscape> {
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Button('¹⁄ₓ', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
                 Button('√x', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
+                    .createBtn(extendedCalc),
                 Button('∛x', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('∜x', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('ln', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
+                    .createBtn(extendedCalc),
                 Button('log₁₀', scienceOperation, Colors.white, size / 2.01)
-                    .createBtn(calculation),
+                    .createBtn(extendedCalc),
+                Button('ln', scienceOperation, Colors.white, size / 1.72)
+                    .createBtn(extendedCalc),
                 Button('4', digits, Colors.white, size).createBtn(calculation),
                 Button('5', digits, Colors.white, size).createBtn(calculation),
                 Button('6', digits, Colors.white, size).createBtn(calculation),
@@ -299,18 +293,14 @@ class _LandscapeState extends State<Landscape> {
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Button('x!', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
+                Button('Rad', scienceOperation, Colors.white, size / 1.72)
+                    .createBtn(extendedCalc),
                 Button('sin', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
+                    .createBtn(extendedCalc),
                 Button('cos', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
+                    .createBtn(extendedCalc),
                 Button('tan', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('e', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('EE', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
+                    .createBtn(extendedCalc),
                 Button('1', digits, Colors.white, size).createBtn(calculation),
                 Button('2', digits, Colors.white, size).createBtn(calculation),
                 Button('3', digits, Colors.white, size).createBtn(calculation),
@@ -320,18 +310,14 @@ class _LandscapeState extends State<Landscape> {
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Button('Rad', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('sinh', scienceOperation, Colors.white, size / 1.9)
-                    .createBtn(calculation),
-                Button('cosh', scienceOperation, Colors.white, size / 2.05)
-                    .createBtn(calculation),
-                Button('tanh', scienceOperation, Colors.white, size / 1.9)
-                    .createBtn(calculation),
                 Button('π', scienceOperation, Colors.white, size / 1.72)
-                    .createBtn(calculation),
-                Button('Rand', scienceOperation, Colors.white, size / 2.2)
-                    .createBtn(calculation),
+                    .createBtn(extendedCalc),
+                Button('sinh', scienceOperation, Colors.white, size / 2.05)
+                    .createBtn(extendedCalc),
+                Button('cosh', scienceOperation, Colors.white, size / 2.05)
+                    .createBtn(extendedCalc),
+                Button('tanh', scienceOperation, Colors.white, size / 2.05)
+                    .createBtn(extendedCalc),
                 Button('0', digits, Colors.white, size).createBtn(calculation),
                 Button('←', digits, Colors.white, size).createBtn(delete),
                 Button(',', digits, Colors.white, size).createBtn(calculation),
